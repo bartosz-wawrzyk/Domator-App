@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pl.domator.modules.ui.DashboardController"
+            prefWidth="800" prefHeight="600"
+            stylesheets="@../css/style.css">
+
+    <top>
+        <MenuBar>
+            <Menu text="Planer posiłków"/>
+            <Menu text="Finanse"/>
+            <Menu text="Auto"/>
+            <Menu text="Ustawienia"/>
+        </MenuBar>
+    </top>
+
+    <center>
+        <StackPane fx:id="mainContent" alignment="CENTER">
+            <Label text="Witaj w Domator App!" styleClass="dashboard-title"/>
+        </StackPane>
+    </center>
+</BorderPane>

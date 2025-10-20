@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="pl.domator.modules.ui.RegisterController"
+      alignment="CENTER" spacing="15"
+      stylesheets="@../css/style.css"
+      prefWidth="400" prefHeight="300"
+      styleClass="login-card">
+    <Label text="Rejestracja użytkownika" styleClass="app-title"/>
+    <TextField fx:id="usernameField" promptText="Login"/>
+    <PasswordField fx:id="passwordField" promptText="Hasło"/>
+    <Button fx:id="registerButton" text="Zarejestruj" onAction="#handleRegister"/>
+    <Label fx:id="statusLabel" styleClass="status-label"/>
+</VBox>

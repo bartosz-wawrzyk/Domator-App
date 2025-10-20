@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pl.domator.modules.ui.LoginController"
+            stylesheets="@../css/style.css"
+            prefWidth="600" prefHeight="400">
+    <children>
+        <StackPane prefWidth="600" prefHeight="400" styleClass="gradient-bg">
+            <VBox alignment="CENTER" spacing="15" styleClass="login-card">
+                <Label text="Domator App" styleClass="app-title"/>
+                <TextField fx:id="usernameField" promptText="Login" />
+                <PasswordField fx:id="passwordField" promptText="Hasło" />
+                <CheckBox fx:id="rememberMeCheckBox" text="Zapamiętaj mnie"/>
+                <HBox spacing="10" alignment="CENTER">
+                    <Button fx:id="loginButton" text="Zaloguj" onAction="#handleLogin"/>
+                    <Button text="Zarejestruj" onAction="#openRegister"/>
+                </HBox>
+                <Label fx:id="statusLabel" styleClass="status-label"/>
+                <StackPane fx:id="loadingPane" visible="false">
+                    <ProgressIndicator />
+                </StackPane>
+            </VBox>
+        </StackPane>
+    </children>
+</AnchorPane>
