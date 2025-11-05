@@ -9,9 +9,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pl.domator.config.DBConnectionController;
-import pl.domator.core.DatabaseInitializer;
 import pl.domator.core.DatabaseUpdater;
 import pl.domator.core.AutoLoginManager;
+import pl.domator.core.LoggerUtils;
 import pl.domator.security.PasswordUtils;
 
 import java.sql.Connection;
@@ -57,40 +57,6 @@ public class LoginController {
                 try (Connection conn = DBConnectionController.getConnection()) {
                     if (conn == null || conn.isClosed()) {
                         throw new Exception("Brak połączenia z bazą.");
-                    }
-
-                    ResultSet rsSchema = conn.getMetaData().getSchemas(null, "dmt");
-                    boolean schemaExists = rsSchema.next();
-
-                    if (!schemaExists && username.equals("admin") && password.equals("admin")) {
-                        runOnFxThread(() -> {
-                            DatabaseUpdateWindow updateWindow = new DatabaseUpdateWindow();
-                            updateWindow.setMessage("Tworzenie schemy bazy danych...");
-                            updateWindow.show();
-
-                            Task<Void> initTask = new Task<>() {
-                                @Override
-                                protected Void call() {
-                                    DatabaseInitializer.initializeDatabase();
-                                    return null;
-                                }
-                            };
-
-                            initTask.setOnSucceeded(ev -> {
-                                updateWindow.close();
-                                statusLabel.setText("Schemat utworzony. Dodaj użytkownika.");
-                                loadingPane.setVisible(false);
-                            });
-
-                            initTask.setOnFailed(ev -> {
-                                updateWindow.close();
-                                loadingPane.setVisible(false);
-                                statusLabel.setText("Błąd podczas tworzenia schematu bazy.");
-                            });
-
-                            new Thread(initTask).start();
-                        });
-                        return null;
                     }
 
                     PreparedStatement ps = conn.prepareStatement("SELECT * FROM dmt.users WHERE username=?");
@@ -154,7 +120,8 @@ public class LoginController {
                                     try {
                                         Thread.sleep(3000);
                                     } catch (InterruptedException ex) {
-                                        ex.printStackTrace();
+                                        LoggerUtils.logError(ex);
+
                                     }
                                     runOnFxThread(() -> {
                                         statusLabel.setText("");
@@ -180,7 +147,7 @@ public class LoginController {
                     }
 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    LoggerUtils.logError(ex);
                     runOnFxThread(() -> {
                         loadingPane.setVisible(false);
                         statusLabel.setText("Błąd podczas sprawdzania wersji bazy.");
@@ -202,6 +169,22 @@ public class LoginController {
     }
 
     @FXML
+    public void openDBConfig() {
+        try {
+            Stage cfgStage = new Stage();
+            cfgStage.initModality(Modality.APPLICATION_MODAL);
+            cfgStage.setTitle("Konfiguracja bazy danych");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pl/domator/fxml/db_config.fxml"));
+            cfgStage.setScene(new Scene(loader.load()));
+            cfgStage.show();
+        } catch (Exception e) {
+            LoggerUtils.logError(e);
+            statusLabel.setText("Błąd otwarcia konfiguracji bazy.");
+        }
+    }
+
+
+    @FXML
     public void openRegister() {
         try {
             Stage regStage = new Stage();
@@ -211,7 +194,7 @@ public class LoginController {
             regStage.setScene(new Scene(loader.load()));
             regStage.show();
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtils.logError(e);
             statusLabel.setText("Błąd otwarcia okna rejestracji.");
         }
     }
@@ -226,7 +209,7 @@ public class LoginController {
 
             loginButton.getScene().getWindow().hide();
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtils.logError(e);
             statusLabel.setText("Błąd otwarcia dashboard.");
         }
     }

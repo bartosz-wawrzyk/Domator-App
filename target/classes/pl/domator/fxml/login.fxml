@@ -1,27 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="pl.domator.modules.ui.LoginController"
-            stylesheets="@../css/style.css"
-            prefWidth="600" prefHeight="400">
-    <children>
-        <StackPane prefWidth="600" prefHeight="400" styleClass="gradient-bg">
-            <VBox alignment="CENTER" spacing="15" styleClass="login-card">
-                <Label text="Domator App" styleClass="app-title"/>
-                <TextField fx:id="usernameField" promptText="Login" />
-                <PasswordField fx:id="passwordField" promptText="Hasło" />
-                <CheckBox fx:id="rememberMeCheckBox" text="Zapamiętaj mnie"/>
-                <HBox spacing="10" alignment="CENTER">
-                    <Button fx:id="loginButton" text="Zaloguj" onAction="#handleLogin"/>
-                    <Button text="Zarejestruj" onAction="#openRegister"/>
-                </HBox>
-                <Label fx:id="statusLabel" styleClass="status-label"/>
-                <StackPane fx:id="loadingPane" visible="false">
-                    <ProgressIndicator />
-                </StackPane>
-            </VBox>
-        </StackPane>
-    </children>
-</AnchorPane>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<BorderPane prefHeight="249.0" prefWidth="403.0" style="-fx-background-color: #f9f8f6; -fx-border-color: #e0dedb; -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.domator.modules.ui.LoginController">
+
+    <top>
+        <HBox alignment="CENTER" spacing="5" style="-fx-padding: 8;">
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Domator App" HBox.hgrow="ALWAYS" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="12">
+            <padding>
+                <Insets bottom="20" left="40" right="40" top="20" />
+            </padding>
+
+            <TextField fx:id="usernameField" prefWidth="240" promptText="Login" style="-fx-background-color: white; -fx-border-color: #dcd8d3; -fx-border-radius: 5; -fx-background-radius: 5;" />
+
+            <PasswordField fx:id="passwordField" prefWidth="240" promptText="Hasło" style="-fx-background-color: white; -fx-border-color: #dcd8d3; -fx-border-radius: 5; -fx-background-radius: 5;" />
+
+            <CheckBox fx:id="rememberMeCheckBox" style="-fx-text-fill: #444;" text="Zapamiętaj mnie" />
+
+            <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10 0 0 0;">
+                <Button fx:id="loginButton" onAction="#handleLogin" style="-fx-background-color: #7c97b0; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 6 18;" text="Zaloguj" />
+
+                <Button onAction="#openRegister" style="-fx-background-color: #d9cbb5; -fx-text-fill: #333; -fx-background-radius: 5; -fx-padding: 6 18;" text="Zarejestruj" />
+            </HBox>
+
+            <Label fx:id="statusLabel" style="-fx-text-fill: #a33; -fx-font-size: 12px;" />
+
+            <StackPane fx:id="loadingPane" visible="false">
+                <ProgressIndicator />
+            </StackPane>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="BOTTOM_RIGHT" spacing="10" style="-fx-padding: 0 10 6 0;">
+            <Label style="-fx-text-fill: #999; -fx-font-size: 11px;" text="Wersja 1.1.0" />
+            <Button onAction="#openDBConfig"
+                    style="-fx-background-color: transparent;">
+                <graphic>
+                    <ImageView fitWidth="24" fitHeight="24" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/gear.png"/>
+                    </ImageView>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="Konfiguracja połączenia"/>
+                </tooltip>
+            </Button>
+        </HBox>
+    </bottom>
+</BorderPane>

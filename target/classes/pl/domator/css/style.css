@@ -1,40 +1,141 @@
-.gradient-bg {
-    -fx-background-color: linear-gradient(to bottom right, #009688, #4caf50);
+/* ===============================
+   GLOBAL STYLES
+=============================== */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #f9f8f6;
+    -fx-text-fill: #333;
 }
 
-.login-card {
-    -fx-background-color: rgba(255,255,255,0.9);
-    -fx-padding: 30;
-    -fx-background-radius: 20;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 2);
+/* ===============================
+   BORDERED PANELS / CARDS
+=============================== */
+.login-card,
+.dashboard-card,
+.register-card,
+.panel {
+    -fx-background-color: white;
+    -fx-border-color: #dcd8d3;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 15px;
 }
 
-.app-title {
-    -fx-font-size: 26px;
-    -fx-text-fill: #2e7d32;
+/* ===============================
+   HEADERS / TITLES
+=============================== */
+.app-title,
+.dashboard-title {
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
+    -fx-text-fill: #333;
 }
 
-.text-field, .password-field {
-    -fx-pref-width: 250;
-    -fx-background-radius: 10;
-    -fx-border-color: #ccc;
-    -fx-border-radius: 10;
-    -fx-padding: 8;
+/* ===============================
+   TEXT FIELDS / PASSWORD FIELDS
+=============================== */
+.text-field,
+.password-field {
+    -fx-background-color: white;
+    -fx-border-color: #dcd8d3;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 6px;
 }
 
+/* ===============================
+   BUTTONS
+=============================== */
 .button {
-    -fx-background-color: #2e7d32;
-    -fx-text-fill: white;
-    -fx-background-radius: 10;
+    -fx-background-radius: 5px;
+    -fx-padding: 6px 18px;
+    -fx-font-weight: bold;
     -fx-cursor: hand;
 }
 
-.button:hover {
-    -fx-background-color: #43a047;
+.button-primary {
+    -fx-background-color: #7c97b0;
+    -fx-text-fill: white;
 }
 
+.button-secondary {
+    -fx-background-color: #d9cbb5;
+    -fx-text-fill: #333;
+}
+
+.button-danger {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+
+.button-success {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+}
+
+.button-info {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+/* ===============================
+   LABELS
+=============================== */
 .status-label {
-    -fx-text-fill: #e53935;
+    -fx-text-fill: #e74c3c;
     -fx-font-size: 12px;
+}
+
+.label-panel-title {
+    -fx-font-weight: bold;
+    -fx-text-fill: #444;
+}
+
+.label-panel-content {
+    -fx-text-fill: #7f8c8d;
+}
+
+/* ===============================
+   MENU BAR
+=============================== */
+.menu-bar {
+    -fx-background-color: #f9f8f6;
+    -fx-border-color: #e0dedb;
+}
+
+/* ===============================
+   HBOX / VBOX SPACING & PADDING
+=============================== */
+.hbox-panel {
+    -fx-spacing: 15px;
+}
+
+.vbox-panel {
+    -fx-spacing: 10px;
+    -fx-padding: 10px;
+}
+
+/* ===============================
+   PROGRESS INDICATOR
+=============================== */
+.progress-indicator {
+    -fx-accent: #7c97b0;
+}
+
+/* ===============================
+   SPECIFIC DASHBOARD PANELS
+=============================== */
+.panel-upcoming {
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.panel-activities {
+    -fx-background-color: white;
+    -fx-border-color: #dcd8d3;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 20px;
 }

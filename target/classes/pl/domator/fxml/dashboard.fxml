@@ -1,24 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="700" prefWidth="1000" xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="pl.domator.modules.ui.DashboardController"
-            prefWidth="800" prefHeight="600"
-            stylesheets="@../css/style.css">
+            style="-fx-background-color: #f9f8f6; -fx-border-color: #e0dedb; -fx-border-radius: 10; -fx-background-radius: 10;">
 
     <top>
-        <MenuBar>
-            <Menu text="Planer posiłków"/>
-            <Menu text="Finanse"/>
-            <Menu text="Auto"/>
-            <Menu text="Ustawienia"/>
+        <MenuBar style="-fx-background-color: #f9f8f6; -fx-border-color: #e0dedb; -fx-border-radius: 10 10 0 0; -fx-padding: 5;">
+            <Menu text="Planer posiłków">
+                <MenuItem onAction="#openMealPlanner" text="Otwórz planer" />
+            </Menu>
+            <Menu text="Finanse">
+                <MenuItem onAction="#openLoanVerification" text="Raty kredytów" />
+                <MenuItem onAction="#openPaymentHistory" text="Historia wpłat" />
+                <MenuItem onAction="#openBillsManagement" text="Rachunki" />
+                <MenuItem onAction="#verifyAllDeadlines" text="Weryfikuj terminy" />
+            </Menu>
+            <Menu text="Auto">
+                <MenuItem onAction="#openCarMaintenance" text="Przeglądy i ubezpieczenia" />
+            </Menu>
+            <Menu text="Terminy">
+                <MenuItem onAction="#openAllDeadlines" text="Wszystkie nadchodzące" />
+                <MenuItem onAction="#verifyAllDeadlines" text="Szybka weryfikacja" />
+            </Menu>
+            <Menu text="Ustawienia">
+                <MenuItem onAction="#openSettings" text="Otwórz ustawienia" />
+            </Menu>
         </MenuBar>
     </top>
 
     <center>
-        <StackPane fx:id="mainContent" alignment="CENTER">
-            <Label text="Witaj w Domator App!" styleClass="dashboard-title"/>
+        <StackPane fx:id="mainContent" alignment="TOP_CENTER">
+            <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 40;">
+
+                <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Witaj w Domator App!" />
+
+                <HBox alignment="CENTER" spacing="15">
+                    <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15; -fx-background-color: white; -fx-border-color: #dcd8d3; -fx-border-radius: 5; -fx-background-radius: 5;">
+                        <Label style="-fx-font-size: 24px;" text="💰" />
+                        <Button onAction="#openLoanVerification"
+                                style="-fx-background-color: #7c97b0; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 6 18;"
+                                text="Raty kredytów" />
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15; -fx-background-color: white; -fx-border-color: #dcd8d3; -fx-border-radius: 5; -fx-background-radius: 5;">
+                        <Label style="-fx-font-size: 24px;" text="🚗" />
+                        <Button onAction="#openCarMaintenance"
+                                style="-fx-background-color: #d9cbb5; -fx-text-fill: #333; -fx-background-radius: 5; -fx-padding: 6 18;"
+                                text="Przeglądy auta" />
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15; -fx-background-color: white; -fx-border-color: #dcd8d3; -fx-border-radius: 5; -fx-background-radius: 5;">
+                        <Label style="-fx-font-size: 24px;" text="📄" />
+                        <Button onAction="#openBillsManagement"
+                                style="-fx-background-color: #7c97b0; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 6 18;"
+                                text="Rachunki" />
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15; -fx-background-color: white; -fx-border-color: #dcd8d3; -fx-border-radius: 5; -fx-background-radius: 5;">
+                        <Label style="-fx-font-size: 24px;" text="📅" />
+                        <Button onAction="#openAllDeadlines"
+                                style="-fx-background-color: #d9cbb5; -fx-text-fill: #333; -fx-background-radius: 5; -fx-padding: 6 18;"
+                                text="Wszystkie terminy" />
+                    </VBox>
+                </HBox>
+
+                <HBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;">
+                    <VBox spacing="5">
+                        <Label style="-fx-font-weight: bold; -fx-text-fill: #444;" text="NAJBLIŻSZE TERMINY:" />
+                        <Label fx:id="upcomingPaymentsLabel" style="-fx-text-fill: #e74c3c; -fx-font-size: 11px;" text="Ładowanie..." />
+                    </VBox>
+                    <Button onAction="#verifyAllDeadlines"
+                            style="-fx-background-color: #7c97b0; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 6 18;"
+                            text="🔔 Sprawdź wszystkie terminy" />
+                </HBox>
+
+                <VBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 20; -fx-background-color: white; -fx-border-color: #dcd8d3; -fx-border-radius: 5; -fx-background-radius: 5;">
+                    <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Ostatnie aktywności:" />
+                    <Label style="-fx-text-fill: #7f8c8d;" text="• Brak ostatnich aktywności" />
+                </VBox>
+
+            </VBox>
         </StackPane>
     </center>
+
 </BorderPane>

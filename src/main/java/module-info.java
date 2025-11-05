@@ -7,6 +7,7 @@ module pl.domator {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
     requires java.desktop;
+    requires org.postgresql.jdbc;
 
     opens pl.domator.app to javafx.fxml;
     opens pl.domator.modules.ui to javafx.fxml;
