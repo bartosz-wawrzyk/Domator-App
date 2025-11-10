@@ -2,109 +2,30 @@ package pl.domator.modules.ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import pl.domator.core.LoggerUtils;
 
 import java.net.URL;
 
 public class DashboardController {
 
     @FXML private StackPane mainContent;
-    @FXML private Label dashboardTitle;
     @FXML private Label upcomingPaymentsLabel;
 
-    @FXML
-    public void initialize() {
-        // Uruchom scheduler przypomnień przy starcie dashboardu
-        //PaymentReminderScheduler.startScheduler();
-        //loadUpcomingPaymentsSummary();
+    private int userId;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @FXML
-    public void openLoanVerification() {
-        openWindow("/pl/domator/fxml/loan_verification.fxml",
-                "Weryfikacja terminów rat kredytowych",
-                "Nie można otworzyć modułu weryfikacji rat kredytowych");
-    }
+    private void initialize() {
 
-    @FXML
-    public void openPaymentHistory() {
-        openWindow("/pl/domator/fxml/payment_history.fxml",
-                "Historia wpłat",
-                "Nie można otworzyć historii wpłat");
-    }
-
-    @FXML
-    public void openCarMaintenance() {
-        openWindow("/pl/domator/fxml/car_maintenance.fxml",
-                "Przeglądy i ubezpieczenia samochodu",
-                "Nie można otworzyć modułu samochodu");
-    }
-
-    @FXML
-    public void openBillsManagement() {
-        openWindow("/pl/domator/fxml/bills_management.fxml",
-                "Zarządzanie rachunkami",
-                "Nie można otworzyć modułu rachunków");
-    }
-
-    @FXML
-    public void openAllDeadlines() {
-        openWindow("/pl/domator/fxml/all_deadlines.fxml",
-                "Wszystkie nadchodzące terminy",
-                "Nie można otworzyć przeglądu terminów");
-    }
-
-    @FXML
-    public void openSettings() {
-        openWindow("/pl/domator/fxml/settings.fxml",
-                "Ustawienia",
-                "Nie można otworzyć ustawień");
-    }
-
-    @FXML
-    public void openMealPlanner() {
-        openWindow("/pl/domator/fxml/meal_planner.fxml",
-                "Planer posiłków",
-                "Nie można otworzyć planera posiłków");
-    }
-
-    @FXML
-    public void verifyAllDeadlines() {
-        /*try {
-            DeadlineChecker checker = new DeadlineChecker();
-            String summary = checker.getAllUpcomingDeadlinesSummary();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Weryfikacja wszystkich terminów");
-            alert.setHeaderText("Najbliższe terminy płatności i obowiązków:");
-            alert.setContentText(summary);
-            alert.showAndWait();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            showAlert("Błąd", "Nie udało się sprawdzić terminów");
-        }*/
-    }
-
-    private void loadUpcomingPaymentsSummary() {
-        /*try {
-            DeadlineChecker checker = new DeadlineChecker();
-            String summary = checker.getDashboardSummary();
-            upcomingPaymentsLabel.setText(summary);
-        } catch (Exception e) {
-            upcomingPaymentsLabel.setText("Błąd ładowania danych");
-        }*/
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     private void openWindow(String fxmlPath, String title, String errorMessage) {
@@ -115,16 +36,81 @@ public class DashboardController {
                 return;
             }
 
-            Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(resource);
-            stage.setScene(new Scene(loader.load()));
+            Parent root = loader.load();
+
+            Object controller = loader.getController();
+            if (controller instanceof UserAware) {
+                ((UserAware) controller).setUserId(userId);
+            }
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
             stage.setTitle(title);
             stage.setResizable(false);
             stage.show();
+
         } catch (Exception e) {
-            e.printStackTrace();
-            showAlert("Błąd", errorMessage);
+            LoggerUtils.logError(e);
         }
     }
 
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void openLoanVerification() {
+        openWindow("/pl/domator/fxml/credits.fxml",
+                "Kredyty i historia wpłat",
+                "Nie można otworzyć modułu szczegółów kredytów użytkownika");
+    }
+
+    @FXML
+    private void openCarMaintenance() {
+        openWindow("/pl/domator/fxml/car_maintenance.fxml",
+                "Przeglądy i ubezpieczenia samochodu",
+                "Nie można otworzyć modułu samochodu");
+    }
+
+    @FXML
+    private void openBillsManagement() {
+        openWindow("/pl/domator/fxml/bills_management.fxml",
+                "Zarządzanie rachunkami",
+                "Nie można otworzyć modułu rachunków");
+    }
+
+    @FXML
+    private void openAllDeadlines() {
+        openWindow("/pl/domator/fxml/all_deadlines.fxml",
+                "Wszystkie nadchodzące terminy",
+                "Nie można otworzyć przeglądu terminów");
+    }
+
+    @FXML
+    private void openSettings() {
+        openWindow("/pl/domator/fxml/settings.fxml",
+                "Ustawienia",
+                "Nie można otworzyć ustawień");
+    }
+
+    @FXML
+    private void openMealPlanner() {
+        openWindow("/pl/domator/fxml/meal_planner.fxml",
+                "Planer posiłków",
+                "Nie można otworzyć planera posiłków");
+    }
+
+    @FXML
+    private void verifyAllDeadlines() {
+        openAllDeadlines();
+    }
+
+    public interface UserAware {
+        void setUserId(int userId);
+    }
 }

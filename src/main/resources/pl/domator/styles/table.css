@@ -1,0 +1,44 @@
+.custom-table {
+    -fx-background-color: #fefefe;
+    -fx-border-color: #e0dedb;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.custom-table .column-header-background {
+    -fx-background-color: #f3f1ef;
+    -fx-border-color: #dcd8d3;
+    -fx-border-radius: 5 5 0 0;
+}
+
+.custom-table .table-row-cell {
+    -fx-background-color: white;
+}
+
+.custom-table .table-row-cell:odd {
+    -fx-background-color: #faf9f7;
+}
+
+.custom-table .table-row-cell:selected {
+    -fx-background-color: #7c97b0;
+    -fx-text-fill: white;
+}
+
+.custom-table .table-cell {
+    -fx-padding: 6;
+    -fx-text-fill: #333;
+}
+
+.text-field, .date-picker {
+    -fx-background-color: #fdfdfd;
+    -fx-border-color: #dcd8d3;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 4 6;
+}
+
+.text-field:disabled, .date-picker:disabled {
+    -fx-opacity: 1.0;
+    -fx-text-fill: #444;
+    -fx-background-color: #f7f7f7;
+}

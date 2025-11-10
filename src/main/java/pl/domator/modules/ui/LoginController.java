@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 
 public class LoginController {
 
+    private int userId;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private CheckBox rememberMeCheckBox;
@@ -67,6 +68,7 @@ public class LoginController {
                             !rsUser.getString("password_hash").equals(PasswordUtils.hashPassword(password))) {
                         throw new Exception("Nieprawidłowe dane logowania.");
                     }
+                    userId = rsUser.getInt("id");
                 }
                 return null;
             }
@@ -201,13 +203,20 @@ public class LoginController {
 
     private void openDashboard() {
         try {
-            Stage dashboardStage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/pl/domator/fxml/dashboard.fxml"));
-            dashboardStage.setScene(new Scene(loader.load()));
+            Scene scene = new Scene(loader.load());
+
+            DashboardController dashboardController = loader.getController();
+            dashboardController.setUserId(userId);
+
+            Stage dashboardStage = new Stage();
+            dashboardStage.setScene(scene);
             dashboardStage.setTitle("Dashboard");
             dashboardStage.show();
 
-            loginButton.getScene().getWindow().hide();
+            Stage currentStage = (Stage) loginButton.getScene().getWindow();
+            currentStage.close();
+
         } catch (Exception e) {
             LoggerUtils.logError(e);
             statusLabel.setText("Błąd otwarcia dashboard.");

@@ -14,10 +14,8 @@
                 <MenuItem onAction="#openMealPlanner" text="Otwórz planer" />
             </Menu>
             <Menu text="Finanse">
-                <MenuItem onAction="#openLoanVerification" text="Raty kredytów" />
-                <MenuItem onAction="#openPaymentHistory" text="Historia wpłat" />
+                <MenuItem onAction="#openLoanVerification" text="Kredyty i historia wpłat" />
                 <MenuItem onAction="#openBillsManagement" text="Rachunki" />
-                <MenuItem onAction="#verifyAllDeadlines" text="Weryfikuj terminy" />
             </Menu>
             <Menu text="Auto">
                 <MenuItem onAction="#openCarMaintenance" text="Przeglądy i ubezpieczenia" />
@@ -43,7 +41,7 @@
                         <Label style="-fx-font-size: 24px;" text="💰" />
                         <Button onAction="#openLoanVerification"
                                 style="-fx-background-color: #7c97b0; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 6 18;"
-                                text="Raty kredytów" />
+                                text="Kredyty" />
                     </VBox>
                     <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15; -fx-background-color: white; -fx-border-color: #dcd8d3; -fx-border-radius: 5; -fx-background-radius: 5;">
                         <Label style="-fx-font-size: 24px;" text="🚗" />
@@ -83,5 +81,4 @@
             </VBox>
         </StackPane>
     </center>
-
 </BorderPane>
