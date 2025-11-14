@@ -43,7 +43,7 @@ public class DatabaseInitializer {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LoggerUtils.logError(e);
         }
     }
 }

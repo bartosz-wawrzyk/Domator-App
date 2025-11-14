@@ -14,7 +14,7 @@ public class AutoLoginManager {
             props.setProperty("password", password);
             props.store(out, "Autologin credentials");
         } catch (IOException e) {
-            e.printStackTrace();
+            LoggerUtils.logError(e);
         }
     }
 
@@ -30,7 +30,7 @@ public class AutoLoginManager {
                 return new String[]{username, password};
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LoggerUtils.logError(e);
         }
         return null;
     }

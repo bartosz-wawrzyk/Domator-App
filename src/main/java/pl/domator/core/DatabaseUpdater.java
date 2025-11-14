@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class DatabaseUpdater {
 
-    public static final int LATEST_VERSION = 1;
+    public static final int LATEST_VERSION = 2;
 
     public static void updateIfNeeded() {
         try (Connection conn = DBConnectionController.getConnection();
@@ -49,6 +49,68 @@ public class DatabaseUpdater {
                     UPDATE dmt.db_version
                     SET db_version = 1,
                         app_version = '1.1.0',
+                        last_update = NOW()
+                    WHERE id = (SELECT id FROM dmt.db_version ORDER BY id DESC LIMIT 1)
+                """);
+            }
+
+            if (currentVersion < 2) {
+                stmt.executeUpdate("""
+                    CREATE TABLE IF NOT EXISTS dmt.vehicles (
+                        id SERIAL PRIMARY KEY,
+                        user_id INT NOT NULL REFERENCES dmt.users(id) ON DELETE CASCADE,
+                        brand VARCHAR(100) NOT NULL,
+                        model VARCHAR(100) NOT NULL,
+                        production_year INT,
+                        registration_number VARCHAR(20) UNIQUE,
+                        vin VARCHAR(50) UNIQUE,
+                        fuel_type VARCHAR(30),
+                        current_mileage INT DEFAULT 0,
+                        notes TEXT
+                    );
+                """);
+
+                stmt.executeUpdate("""
+                    CREATE TABLE IF NOT EXISTS dmt.vehicle_technical_inspections (
+                        id SERIAL PRIMARY KEY,
+                        vehicle_id INT NOT NULL REFERENCES dmt.vehicles(id) ON DELETE CASCADE,
+                        inspection_date DATE NOT NULL,
+                        valid_until DATE NOT NULL,
+                        mileage_at_inspection INT,
+                        cost DECIMAL(10,2),
+                        notes TEXT
+                    );
+                """);
+
+                stmt.executeUpdate("""
+                    CREATE TABLE IF NOT EXISTS dmt.vehicle_insurance_policies (
+                        id SERIAL PRIMARY KEY,
+                        vehicle_id INT NOT NULL REFERENCES dmt.vehicles(id) ON DELETE CASCADE,
+                        policy_type VARCHAR(10) NOT NULL CHECK (policy_type IN ('OC', 'AC', 'OC+AC')),
+                        insurer_name VARCHAR(100) NOT NULL,
+                        policy_number VARCHAR(50),
+                        start_date DATE NOT NULL,
+                        end_date DATE NOT NULL,
+                        cost DECIMAL(10,2),
+                        notes TEXT
+                    );
+                """);
+
+                stmt.executeUpdate("""
+                    CREATE TABLE IF NOT EXISTS dmt.vehicle_service_history (
+                        id SERIAL PRIMARY KEY,
+                        vehicle_id INT NOT NULL REFERENCES dmt.vehicles(id) ON DELETE CASCADE,
+                        service_date DATE NOT NULL,
+                        mileage_at_service INT,
+                        cost DECIMAL(10,2),
+                        description TEXT NOT NULL
+                    );
+                """);
+
+                stmt.executeUpdate("""
+                    UPDATE dmt.db_version
+                    SET db_version = 2,
+                        app_version = '1.2.0',
                         last_update = NOW()
                     WHERE id = (SELECT id FROM dmt.db_version ORDER BY id DESC LIMIT 1)
                 """);

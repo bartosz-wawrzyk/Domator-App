@@ -11,6 +11,10 @@
     -fx-border-radius: 5 5 0 0;
 }
 
+.custom-table .column-header .label {
+    -fx-alignment: CENTER;
+}
+
 .custom-table .table-row-cell {
     -fx-background-color: white;
 }
@@ -27,6 +31,7 @@
 .custom-table .table-cell {
     -fx-padding: 6;
     -fx-text-fill: #333;
+    -fx-alignment: CENTER;
 }
 
 .text-field, .date-picker {

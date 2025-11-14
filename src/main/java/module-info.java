@@ -16,6 +16,8 @@ module pl.domator {
     opens pl.domator.security to javafx.fxml;
     opens pl.domator.modules.finances.controller to javafx.fxml;
     opens pl.domator.modules.finances.model to javafx.fxml;
+    opens pl.domator.modules.auto.controller to javafx.fxml;
+    opens pl.domator.modules.auto.model to javafx.fxml;
 
     exports pl.domator.app;
     exports pl.domator.modules.ui;
@@ -24,4 +26,6 @@ module pl.domator {
     exports pl.domator.security;
     exports pl.domator.modules.finances.controller;
     exports pl.domator.modules.finances.model;
+    exports pl.domator.modules.auto.controller;
+    exports pl.domator.modules.auto.model;
 }

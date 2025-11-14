@@ -18,7 +18,10 @@
                 <MenuItem onAction="#openBillsManagement" text="Rachunki" />
             </Menu>
             <Menu text="Auto">
-                <MenuItem onAction="#openCarMaintenance" text="Przeglądy i ubezpieczenia" />
+                <MenuItem onAction="#openCardVehicle" text="Karta pojazdu" />
+                <MenuItem onAction="#openVehicleTechnicalInspection" text="Badanie technicze" />
+                <MenuItem onAction="#openVehicleInsurancePolicies" text="Polisa OC" />
+                <MenuItem onAction="#openVehicleServiceHistory" text="Historia serwisów" />
             </Menu>
             <Menu text="Terminy">
                 <MenuItem onAction="#openAllDeadlines" text="Wszystkie nadchodzące" />
@@ -45,9 +48,9 @@
                     </VBox>
                     <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15; -fx-background-color: white; -fx-border-color: #dcd8d3; -fx-border-radius: 5; -fx-background-radius: 5;">
                         <Label style="-fx-font-size: 24px;" text="🚗" />
-                        <Button onAction="#openCarMaintenance"
+                        <Button onAction="#openCardVehicle"
                                 style="-fx-background-color: #d9cbb5; -fx-text-fill: #333; -fx-background-radius: 5; -fx-padding: 6 18;"
-                                text="Przeglądy auta" />
+                                text="Karta pojazdu" />
                     </VBox>
                     <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15; -fx-background-color: white; -fx-border-color: #dcd8d3; -fx-border-radius: 5; -fx-background-radius: 5;">
                         <Label style="-fx-font-size: 24px;" text="📄" />

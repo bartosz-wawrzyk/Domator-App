@@ -4,18 +4,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pl.domator.core.LoggerUtils;
-
-import java.net.URL;
+import pl.domator.core.AlertUtils;
 
 public class DashboardController {
 
+    public Label upcomingPaymentsLabel;
     @FXML private StackPane mainContent;
-    @FXML private Label upcomingPaymentsLabel;
 
     private int userId;
 
@@ -30,13 +29,7 @@ public class DashboardController {
 
     private void openWindow(String fxmlPath, String title, String errorMessage) {
         try {
-            URL resource = getClass().getResource(fxmlPath);
-            if (resource == null) {
-                showAlert("Menu niedostępne", "Ten moduł jest niedostępny w tym momencie.");
-                return;
-            }
-
-            FXMLLoader loader = new FXMLLoader(resource);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
             Object controller = loader.getController();
@@ -48,19 +41,19 @@ public class DashboardController {
             stage.setScene(new Scene(root));
             stage.setTitle(title);
             stage.setResizable(false);
-            stage.show();
+
+            Stage ownerStage = (Stage) mainContent.getScene().getWindow();
+            stage.initOwner(ownerStage);
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            stage.showAndWait();
 
         } catch (Exception e) {
             LoggerUtils.logError(e);
+            if (errorMessage != null) {
+                AlertUtils.showError("Błąd", errorMessage);
+            }
         }
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     @FXML
@@ -71,10 +64,31 @@ public class DashboardController {
     }
 
     @FXML
-    private void openCarMaintenance() {
-        openWindow("/pl/domator/fxml/car_maintenance.fxml",
-                "Przeglądy i ubezpieczenia samochodu",
-                "Nie można otworzyć modułu samochodu");
+    private void openCardVehicle() {
+        openWindow("/pl/domator/fxml/car_card.fxml",
+                "Karta pojazdu",
+                "Nie można otworzyć karty pojazdu");
+    }
+
+    @FXML
+    public void openVehicleTechnicalInspection() {
+        openWindow("/pl/domator/fxml/VehicleTechnicalInspections.fxml",
+                "Badanie techniczne",
+                "Nie można otworzyć badań technicznych");
+    }
+
+    @FXML
+    public void openVehicleInsurancePolicies() {
+        openWindow("/pl/domator/fxml/VehicleInsurancePolicies.fxml",
+                "Polisa OC",
+                "Nie można otworzyć polis OC");
+    }
+
+    @FXML
+    public void openVehicleServiceHistory() {
+        openWindow("/pl/domator/fxml/VehicleServiceHistory.fxml",
+                "Historia serwisów",
+                "Nie można otworzyć historii serwisów");
     }
 
     @FXML
