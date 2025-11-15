@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<BorderPane prefHeight="249.0" prefWidth="403.0" style="-fx-background-color: #f9f8f6; -fx-border-color: #e0dedb; -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.domator.modules.ui.LoginController">
+<BorderPane prefHeight="249.0" prefWidth="403.0" style="-fx-background-color: #f9f8f6; -fx-border-color: #e0dedb; -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.domator.modules.ui.LoginController">
 
     <top>
-        <HBox alignment="CENTER" spacing="5" style="-fx-padding: 8;">
-            <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Domator App" HBox.hgrow="ALWAYS" />
-        </HBox>
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+            <ImageView fitHeight="80" fitWidth="80" preserveRatio="true">
+                <Image url="@../icons/logo.PNG" />
+            </ImageView>
+
+            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Domator App" />
+        </VBox>
     </top>
 
     <center>
@@ -50,17 +44,15 @@
     </center>
 
     <bottom>
-        <HBox alignment="BOTTOM_RIGHT" spacing="10" style="-fx-padding: 0 10 6 0;">
-            <Label style="-fx-text-fill: #999; -fx-font-size: 11px;" text="Wersja 1.1.0" />
-            <Button onAction="#openDBConfig"
-                    style="-fx-background-color: transparent;">
+        <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="401.0" spacing="10" style="-fx-padding: 0 10 6 0;">
+            <Button onAction="#openDBConfig" style="-fx-background-color: transparent;">
                 <graphic>
-                    <ImageView fitWidth="24" fitHeight="24" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../icons/gear.png"/>
+                    <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons/gear.png" />
                     </ImageView>
                 </graphic>
                 <tooltip>
-                    <Tooltip text="Konfiguracja połączenia"/>
+                    <Tooltip text="Konfiguracja połączenia" />
                 </tooltip>
             </Button>
         </HBox>

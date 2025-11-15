@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="15"
+      xmlns="http://javafx.com/javafx/21"
+      style="-fx-padding: 25; -fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 10; -fx-background-radius: 10;">
+
+    <ProgressIndicator />
+    <Label text="Aktualizacja bazy danych..." style="-fx-font-size: 14px; -fx-text-fill: #444;" />
+
+</VBox>

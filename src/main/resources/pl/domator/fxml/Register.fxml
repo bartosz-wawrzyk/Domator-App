@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="500.0" prefWidth="420" style="-fx-background-color: #f9f8f6; -fx-border-color: #e0dedb;                    -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.domator.modules.ui.RegisterController">
+
+    <top>
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+            <ImageView fitHeight="80" fitWidth="80" preserveRatio="true">
+                <Image url="@../icons/logo.PNG" />
+            </ImageView>
+
+            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Domator App" />
+
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #666;" text="Rejestracja użytkownika" />
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <padding>
+                <Insets bottom="20" left="40" right="40" top="0" />
+            </padding>
+
+            <VBox spacing="3">
+                <TextField fx:id="usernameField" prefWidth="240" promptText="Login" style="-fx-background-color: white; -fx-border-color: #dcd8d3;                                   -fx-border-radius: 5; -fx-background-radius: 5;" />
+                <Label fx:id="usernameError" style="-fx-text-fill: #c0392b; -fx-font-size: 11px;" />
+            </VBox>
+
+            <VBox spacing="3">
+                <PasswordField fx:id="passwordField" prefWidth="240" promptText="Hasło" style="-fx-background-color: white; -fx-border-color: #dcd8d3;                                       -fx-border-radius: 5; -fx-background-radius: 5;" />
+                <Label fx:id="passwordError" style="-fx-text-fill: #c0392b; -fx-font-size: 11px;" />
+            </VBox>
+
+            <VBox spacing="3">
+                <PasswordField fx:id="passwordConfirmField" prefWidth="240" promptText="Powtórz hasło" style="-fx-background-color: white; -fx-border-color: #dcd8d3;                                       -fx-border-radius: 5; -fx-background-radius: 5;" />
+                <Label fx:id="passwordConfirmError" style="-fx-text-fill: #c0392b; -fx-font-size: 11px;" />
+            </VBox>
+
+            <HBox alignment="CENTER" spacing="10" style="-fx-padding: 20 0 0 0;">
+                <Button fx:id="registerButton" onAction="#handleRegister" style="-fx-background-color: #7c97b0; -fx-text-fill: white;                                -fx-background-radius: 5; -fx-padding: 6 18;" text="Zarejestruj" />
+
+                <Button fx:id="cancelButton" onAction="#handleCancel" style="-fx-background-color: #d9cbb5; -fx-text-fill: #333;                                -fx-background-radius: 5; -fx-padding: 6 18;" text="Anuluj" />
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

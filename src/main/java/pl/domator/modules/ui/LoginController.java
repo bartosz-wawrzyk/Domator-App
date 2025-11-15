@@ -97,6 +97,9 @@ public class LoginController {
     }
 
     private void checkDatabaseVersionAndProceed() {
+
+        Stage loginStage = (Stage) loginButton.getScene().getWindow();
+
         Task<Void> versionTask = new Task<>() {
             @Override
             protected Void call() {
@@ -106,8 +109,11 @@ public class LoginController {
                     int latestVersion = DatabaseUpdater.getLatestVersion();
 
                     if (currentVersion < latestVersion) {
+
                         runOnFxThread(() -> {
-                            statusLabel.setText("Aktualizacja bazy danych...");
+                            loginStage.close();
+
+                            Stage updateStage = showUpdateDialog();
 
                             Task<Void> updateTask = new Task<>() {
                                 @Override
@@ -121,21 +127,21 @@ public class LoginController {
                                 new Thread(() -> {
                                     try {
                                         Thread.sleep(3000);
-                                    } catch (InterruptedException ex) {
-                                        LoggerUtils.logError(ex);
+                                    } catch (InterruptedException ignored) {}
 
-                                    }
                                     runOnFxThread(() -> {
-                                        statusLabel.setText("");
-                                        loadingPane.setVisible(false);
+                                        updateStage.close();
                                         openDashboard();
                                     });
+
                                 }).start();
                             });
 
                             updateTask.setOnFailed(ev -> {
-                                loadingPane.setVisible(false);
-                                statusLabel.setText("Błąd podczas aktualizacji bazy.");
+                                runOnFxThread(() -> {
+                                    updateStage.close();
+                                    LoggerUtils.logError((Exception) updateTask.getException());
+                                });
                             });
 
                             new Thread(updateTask).start();
@@ -143,18 +149,15 @@ public class LoginController {
 
                     } else {
                         runOnFxThread(() -> {
-                            loadingPane.setVisible(false);
+                            loginStage.close();
                             openDashboard();
                         });
                     }
 
                 } catch (Exception ex) {
                     LoggerUtils.logError(ex);
-                    runOnFxThread(() -> {
-                        loadingPane.setVisible(false);
-                        statusLabel.setText("Błąd podczas sprawdzania wersji bazy.");
-                    });
                 }
+
                 return null;
             }
         };
@@ -176,12 +179,12 @@ public class LoginController {
             Stage cfgStage = new Stage();
             cfgStage.initModality(Modality.APPLICATION_MODAL);
             cfgStage.setTitle("Konfiguracja bazy danych");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pl/domator/fxml/db_config.fxml"));
+            cfgStage.setResizable(false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pl/domator/fxml/DBConfig.fxml"));
             cfgStage.setScene(new Scene(loader.load()));
             cfgStage.show();
         } catch (Exception e) {
             LoggerUtils.logError(e);
-            statusLabel.setText("Błąd otwarcia konfiguracji bazy.");
         }
     }
 
@@ -192,12 +195,12 @@ public class LoginController {
             Stage regStage = new Stage();
             regStage.initModality(Modality.APPLICATION_MODAL);
             regStage.setTitle("Rejestracja użytkownika");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pl/domator/fxml/register.fxml"));
+            regStage.setResizable(false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pl/domator/fxml/Register.fxml"));
             regStage.setScene(new Scene(loader.load()));
             regStage.show();
         } catch (Exception e) {
             LoggerUtils.logError(e);
-            statusLabel.setText("Błąd otwarcia okna rejestracji.");
         }
     }
 
@@ -219,7 +222,27 @@ public class LoginController {
 
         } catch (Exception e) {
             LoggerUtils.logError(e);
-            statusLabel.setText("Błąd otwarcia dashboard.");
         }
     }
+
+    private Stage showUpdateDialog() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pl/domator/fxml/UpdateDialog.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            Stage stage = new Stage();
+            stage.setTitle("Aktualizacja");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+            return stage;
+
+        } catch (Exception e) {
+            LoggerUtils.logError(e);
+            return null;
+        }
+    }
+
 }

@@ -3,6 +3,7 @@ package pl.domator.config;
 import pl.domator.core.LoggerUtils;
 import pl.domator.security.EncryptionUtils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -20,13 +21,12 @@ public class DBConnectionController {
         }
 
         Properties props = new Properties();
-        try (InputStream input = DBConnectionController.class.getResourceAsStream("/database.properties")) {
-            if (input == null) {
-                LoggerUtils.logMessage("Nie znaleziono pliku database.properties w resources");
-            }
+
+        try (InputStream input = new FileInputStream("database.properties")) {
             props.load(input);
         } catch (IOException e) {
-            LoggerUtils.logMessage("Błąd podczas ładowania konfiguracji bazy danych");
+            LoggerUtils.logMessage("Nie można otworzyć pliku database.properties: " + e.getMessage());
+            throw new SQLException("Brak konfiguracji połączenia.");
         }
 
         String url = props.getProperty("db.url");
@@ -37,10 +37,11 @@ public class DBConnectionController {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            LoggerUtils.logMessage("Brak sterownika PostgreSQL JDBC w classpath");
+            LoggerUtils.logMessage("Brak sterownika PostgreSQL JDBC");
         }
 
         connection = DriverManager.getConnection(url, user, password);
         return connection;
     }
+
 }
