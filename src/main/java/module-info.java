@@ -9,23 +9,27 @@ module pl.domator {
     requires java.desktop;
     requires org.postgresql.jdbc;
 
-    opens pl.domator.app to javafx.fxml;
-    opens pl.domator.modules.ui to javafx.fxml;
-    opens pl.domator.config to javafx.fxml;
-    opens pl.domator.core to javafx.fxml;
-    opens pl.domator.security to javafx.fxml;
-    opens pl.domator.modules.finances.controller to javafx.fxml;
-    opens pl.domator.modules.finances.model to javafx.fxml;
-    opens pl.domator.modules.auto.controller to javafx.fxml;
-    opens pl.domator.modules.auto.model to javafx.fxml;
+    opens pl.domator.App to javafx.fxml;
+    opens pl.domator.Modules.UI to javafx.fxml;
+    opens pl.domator.Config to javafx.fxml;
+    opens pl.domator.Core to javafx.fxml;
+    opens pl.domator.Security to javafx.fxml;
+    opens pl.domator.Modules.Finances.Controller to javafx.fxml;
+    opens pl.domator.Modules.Finances.Model to javafx.fxml;
+    opens pl.domator.Modules.Vehicle.Controller to javafx.fxml;
+    opens pl.domator.Modules.Vehicle.Model to javafx.fxml;
+    opens pl.domator.Modules.MealPlanner.Controller to javafx.fxml;
+    opens pl.domator.Modules.MealPlanner.Model to javafx.fxml;
 
-    exports pl.domator.app;
-    exports pl.domator.modules.ui;
-    exports pl.domator.config;
-    exports pl.domator.core;
-    exports pl.domator.security;
-    exports pl.domator.modules.finances.controller;
-    exports pl.domator.modules.finances.model;
-    exports pl.domator.modules.auto.controller;
-    exports pl.domator.modules.auto.model;
+    exports pl.domator.App;
+    exports pl.domator.Modules.UI;
+    exports pl.domator.Config;
+    exports pl.domator.Core;
+    exports pl.domator.Security;
+    exports pl.domator.Modules.Finances.Controller;
+    exports pl.domator.Modules.Finances.Model;
+    exports pl.domator.Modules.Vehicle.Controller;
+    exports pl.domator.Modules.Vehicle.Model;
+    exports pl.domator.Modules.MealPlanner.Controller;
+    exports pl.domator.Modules.MealPlanner.Model;
 }

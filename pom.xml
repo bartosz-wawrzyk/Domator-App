@@ -14,7 +14,7 @@
     <junit.version>5.10.2</junit.version>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
-    <main.class>pl.domator.app.MainApp</main.class>
+    <main.class>pl.domator.App.MainApp</main.class>
   </properties>
 
   <dependencies>
@@ -139,7 +139,7 @@
               <outfile>target/Domator.exe</outfile>
               <errTitle>Domator App</errTitle>
               <classPath>
-                <mainClass>pl.domator.app.MainApp</mainClass>
+                <mainClass>pl.domator.App.MainApp</mainClass>
               </classPath>
               <jre>
                 <minVersion>21.0</minVersion>

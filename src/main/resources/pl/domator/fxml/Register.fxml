@@ -5,7 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="500.0" prefWidth="420" style="-fx-background-color: #f9f8f6; -fx-border-color: #e0dedb;                    -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.domator.modules.ui.RegisterController">
+<BorderPane prefHeight="500.0" prefWidth="420" style="-fx-background-color: #f9f8f6; -fx-border-color: #e0dedb;                    -fx-border-radius: 10; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.domator.Modules.UI.RegisterController">
 
     <top>
         <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
