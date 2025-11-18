@@ -104,14 +104,14 @@ public class DashboardController {
 
     @FXML
     private void openBillsManagement() {
-        openWindow("/pl/domator/fxml/bills_management.fxml",
+        openWindow("",
                 "Zarządzanie rachunkami",
                 "Nie można otworzyć modułu rachunków");
     }
 
     @FXML
     private void openAllDeadlines() {
-        openWindow("/pl/domator/fxml/all_deadlines.fxml",
+        openWindow("",
                 "Wszystkie nadchodzące terminy",
                 "Nie można otworzyć przeglądu terminów");
     }
@@ -122,7 +122,7 @@ public class DashboardController {
     }
 
     public void openAddDish() {
-        openWindow("/pl/domator/fxml/DishView.fxml",
+        openWindow("/pl/domator/fxml/MealPlanner/DishView.fxml",
                 "Moje dania",
                 "Nie można otworzyć okna dodawania dań");
     }
